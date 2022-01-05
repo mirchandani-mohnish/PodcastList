@@ -18,6 +18,7 @@ function App() {
       <Container fluid>
         <Podcastlist />
       </Container>
+      
       <MusicPlayerBar />
     </div>
   );

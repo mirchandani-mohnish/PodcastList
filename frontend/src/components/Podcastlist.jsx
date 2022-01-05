@@ -9,7 +9,7 @@ class Podcastlist extends Component {
     constructor(props){
         super(props);
         this.state = {
-            PodcastArray:[1,23,4]
+            PodcastArray:[1,23,4,2,3,4,5,6,7,8,11,22,33,44,55,66,77,88,99]
         }
         
         this.renderPodCasts = this.renderPodCasts.bind(this);
@@ -51,6 +51,7 @@ class Podcastlist extends Component {
             
         ))
     }
+
     render(){
         return(
             <div className="PodcastListMain">

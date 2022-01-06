@@ -108,18 +108,20 @@ class Podcastlist extends Component {
         this.setState({
             searchTerm : searchTerm
         })
+        
     }
     
     renderPodCasts = () => {
 
+        console.log(this.state.searchTerm);
         const PodcastList = this.state.PodcastArray.filter((podcast) => {
-            Object.values(podcast).join(" ").toLowerCase().includes(this.state.searchTerm);
-        })
+            return Object.values(podcast).join("").toLowerCase().includes(this.state.searchTerm.toLowerCase());
+        });
 
         const LastPodcastIndex = this.state.CurrentPage * this.state.PodcastsPerPage;
         const FirstPodcasttIndex = LastPodcastIndex - this.state.PodcastsPerPage;
         
-        const Podcasts = this.state.searchTerm !== "" ? (PodcastList.slice(FirstPodcasttIndex, LastPodcastIndex)) : this.state.PodcastArray;
+        const Podcasts = this.state.searchTerm !== "" ? (PodcastList.slice(FirstPodcasttIndex, LastPodcastIndex)) : this.state.PodcastArray.slice(FirstPodcasttIndex, LastPodcastIndex);
 
         
         return Podcasts.map((podcast) => (

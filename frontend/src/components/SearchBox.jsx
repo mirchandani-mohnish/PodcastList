@@ -25,6 +25,7 @@ export default class SearchBox extends Component {
         })
 
         this.props.searchHandler(this.state.searchVal);
+        
     }
     render() {
         return (

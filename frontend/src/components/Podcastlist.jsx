@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import {Component} from 'react';
 import Pagination from './Pagination';
+import SearchBox from './SearchBox';
+
+
 
 class Podcastlist extends Component {
     constructor(props){
@@ -35,11 +38,50 @@ class Podcastlist extends Component {
                     "_id": "61d5a6f7058df54d61f15331",
                     "title": "Deann Vasquez",
                     "description": "Esse tempor consequat deserunt in. Cupidatat ipsum voluptate fugiat fugiat fugiat dolor culpa pariatur anim cupidatat. Adipisicing aute dolore excepteur labore elit occaecat consectetur irure. Ut labore et id eu aliquip quis fugiat non sint do.\r\n"
-                }
+                },
                 
+            
+                {
+                    "_id": "61d6b39ccd2676412217bde2",
+                    "title": "Lilian Austin",
+                    "description": "Nulla nostrud elit excepteur ut. Ipsum quis aute magna occaecat ad nulla reprehenderit. Qui in minim dolor eu consequat consequat laborum do. Adipisicing deserunt duis laborum ipsum exercitation voluptate veniam. Ipsum elit proident dolore adipisicing elit commodo occaecat velit amet et.\r\n"
+                },
+                {
+                    "_id": "61d6b39cbbe75f3f00df41e5",
+                    "title": "Summer Delgado",
+                    "description": "Culpa ipsum aliquip anim dolor commodo ipsum laboris occaecat labore. Eiusmod laborum exercitation dolore sint ea duis incididunt elit cupidatat. Laborum labore ad excepteur excepteur enim exercitation cillum do laboris adipisicing ex aute qui. Nostrud aliquip esse duis aute irure enim ut.\r\n"
+                },
+                {
+                    "_id": "61d6b39c9aefd38d7ca6826a",
+                    "title": "Higgins Holloway",
+                    "description": "Ullamco ad elit mollit dolor magna minim esse labore est exercitation labore. Est fugiat excepteur magna velit reprehenderit ipsum aliquip esse dolor id et aute. Reprehenderit ipsum magna id enim elit consectetur commodo sit dolore sit aute ex. Do fugiat sit mollit non sunt tempor ullamco dolore amet labore laboris in aliqua labore. Culpa id laborum ea ex qui cupidatat incididunt et adipisicing aliquip aliquip velit minim laborum.\r\n"
+                },
+                {
+                    "_id": "61d6b39caa5d52b4a721f93b",
+                    "title": "Logan Duran",
+                    "description": "Exercitation minim sunt dolore et duis veniam fugiat nulla velit ullamco aliqua quis. Aute in non voluptate in. Laborum dolore nisi duis eu sit incididunt consequat consequat excepteur anim nostrud non incididunt et.\r\n"
+                },
+                {
+                    "_id": "61d6b39cd50162083007a91a",
+                    "title": "Vance Herring",
+                    "description": "Amet Lorem aute dolore exercitation sint sunt et do laborum. Ut quis laborum elit eiusmod incididunt. Voluptate laboris cillum irure ex dolore reprehenderit exercitation elit culpa ullamco. Laboris veniam fugiat adipisicing consequat enim aute sint anim veniam. Culpa amet cupidatat amet deserunt. Deserunt magna in do consequat. Culpa nostrud cupidatat sit eu non id magna eu incididunt.\r\n"
+                },
+                {
+                    "_id": "61d6b39ce45e106468b35067",
+                    "title": "Rebekah Aguilar",
+                    "description": "Commodo eu fugiat magna amet sint id velit fugiat fugiat pariatur Lorem aliquip enim. Reprehenderit quis est veniam voluptate pariatur veniam veniam commodo id officia. Qui et velit est dolor ullamco.\r\n"
+                },
+                {
+                    "_id": "61d6b39ce78e3f1e8bb1dd10",
+                    "title": "Jacobson Swanson",
+                    "description": "Incididunt id aute mollit ad esse quis do veniam fugiat cillum. Duis velit quis laborum ullamco elit qui. Ex est exercitation occaecat cillum do nulla officia ea in minim. Ad amet commodo deserunt ipsum occaecat.\r\n"
+                }
+            
+            
             ],
             CurrentPage: 1, 
-            PodcastsPerPage: 8
+            PodcastsPerPage: 8,
+            searchTerm: ""
         }
         
         this.renderPodCasts = this.renderPodCasts.bind(this);
@@ -61,13 +103,25 @@ class Podcastlist extends Component {
 
     
     pageChange = (pagenum) => this.setState({CurrentPage: pagenum})
-
+    
+    getSearchTerm = (searchTerm) => {
+        this.setState({
+            searchTerm : searchTerm
+        })
+    }
+    
     renderPodCasts = () => {
+
+        const PodcastList = this.state.PodcastArray.filter((podcast) => {
+            Object.values(podcast).join(" ").toLowerCase().includes(this.state.searchTerm);
+        })
 
         const LastPodcastIndex = this.state.CurrentPage * this.state.PodcastsPerPage;
         const FirstPodcasttIndex = LastPodcastIndex - this.state.PodcastsPerPage;
-        const Podcasts = this.state.PodcastArray.slice(FirstPodcasttIndex, LastPodcastIndex);
+        
+        const Podcasts = this.state.searchTerm !== "" ? (PodcastList.slice(FirstPodcasttIndex, LastPodcastIndex)) : this.state.PodcastArray;
 
+        
         return Podcasts.map((podcast) => (
             
             <Col key={podcast._id}>
@@ -88,10 +142,12 @@ class Podcastlist extends Component {
         ))
     }
 
+    
     render(){
         return(
             <div className="PodcastListMain">
                 <Container>
+                    <SearchBox searchHandler={this.getSearchTerm} />
                     <Row>
                         {this.renderPodCasts()}
                         

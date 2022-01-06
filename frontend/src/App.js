@@ -11,6 +11,7 @@ import MusicPlayerBar from './components/MusicPlayerBar';
 
 
 
+
 function App() {
   return (
     
@@ -19,7 +20,7 @@ function App() {
         <Podcastlist />
       </Container>
       
-      <MusicPlayerBar />
+      {/* <MusicPlayerBar /> */}
     </div>
   );
 }

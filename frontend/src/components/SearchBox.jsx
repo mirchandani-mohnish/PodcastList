@@ -13,7 +13,7 @@ export default class SearchBox extends Component {
         }
 
         this.inputElement = React.createRef();
-
+        
         this.handleSearch = this.handleSearch.bind(this);
 
     }
@@ -23,9 +23,9 @@ export default class SearchBox extends Component {
         this.setState({
             searchVal: this.inputElement.current.value
         })
-
-        this.props.searchHandler(this.state.searchVal);
         
+        this.props.searchHandler(this.state.searchVal);
+        // call the searchhandler for the parent function i.e. Podcastlist.jsx 
     }
     render() {
         return (
@@ -35,6 +35,7 @@ export default class SearchBox extends Component {
                     <label class="form-label" for="form1">Search</label>
                 </div>
                 <button type="button" class="btn btn-primary">
+                    Search
                     <i class="fas fa-search"></i>
                 </button>
             </div>

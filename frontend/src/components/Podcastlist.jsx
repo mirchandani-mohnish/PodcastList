@@ -108,19 +108,22 @@ class Podcastlist extends Component {
         this.setState({
             searchTerm : searchTerm
         })
-        
+        // the searchterm setter function
     }
     
     renderPodCasts = () => {
-
+        // main function to render the podcasts based on selective terms. 
         console.log(this.state.searchTerm);
         const PodcastList = this.state.PodcastArray.filter((podcast) => {
             return Object.values(podcast).join("").toLowerCase().includes(this.state.searchTerm.toLowerCase());
+            // this line basically combines the entire string of each podcast and then checks whether the search term exists in it.
         });
-
+        // PodcastList is a filtered version of the PodcastArray (in state) 
+        
+        
         const LastPodcastIndex = this.state.CurrentPage * this.state.PodcastsPerPage;
         const FirstPodcasttIndex = LastPodcastIndex - this.state.PodcastsPerPage;
-        
+        // we take the lastindex and firstindex to generate the filtered list for pagination. 
         const Podcasts = this.state.searchTerm !== "" ? (PodcastList.slice(FirstPodcasttIndex, LastPodcastIndex)) : this.state.PodcastArray.slice(FirstPodcasttIndex, LastPodcastIndex);
 
         

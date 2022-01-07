@@ -17,7 +17,14 @@ function App() {
     
     <div className="App">
       <Container fluid>
-        <Podcastlist />
+        <Row>
+          <Col>
+            <Podcastlist />
+          </Col>
+          <Col lg={3}>
+            <MusicPlayerBar />
+          </Col>
+        </Row>
       </Container>
       
       {/* <MusicPlayerBar /> */}

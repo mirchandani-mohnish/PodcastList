@@ -89,10 +89,11 @@ class Podcastlist extends Component {
 
     async componentDidMount(){
         try{
-            const podcasts = await Axios.get("https://localhost:8000/backend/getPodcasts");
-            
+            const podcasts = await Axios.get("/getPodcasts");
+            console.log(podcasts.data);
+
             this.setState({
-                PodcastArray: podcasts
+                PodcastArray: podcasts.data
             })
         }catch(err){
             console.log(err);

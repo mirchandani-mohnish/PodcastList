@@ -7,7 +7,7 @@ export default class MusicPlayerBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+            
         }
 
     }
@@ -28,7 +28,7 @@ export default class MusicPlayerBar extends Component {
                     
                     
                     <div className="ButtonPanel">
-                    <AudioPlayer src="https://localhost:3000/temp/TestMusic.mp3" onPlay={() => { console.log("playing")}} />
+                    <AudioPlayer src={this.props.AudioFile} onPlay={() => { console.log("playing")}} />
     
                     </div>
                     

@@ -24,7 +24,7 @@ export default class SearchBox extends Component {
             searchVal: this.inputElement.current.value
         })
         
-        this.props.searchHandler(this.state.searchVal);
+        this.props.searchHandler(this.inputElement.current.value);
         // call the searchhandler for the parent function i.e. Podcastlist.jsx 
     }
     render() {

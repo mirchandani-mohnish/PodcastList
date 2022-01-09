@@ -4,6 +4,7 @@ import mutagen
 from mutagen.wave import WAVE
 from django.db.models.signals import post_init, post_save
 from django.dispatch import receiver
+import threading
 
 def read_file(filename):
     with open(filename, "rb") as _file:
@@ -94,7 +95,8 @@ def create_transcript(sender,instance, **kwargs):
     filename = instance.audio_file
     print(filename)
     filename = "media/{}".format(filename)
-    convertor(filename)
+    t1 = threading.Thread(target=convertor, args=(filename,))
+    t1.start()
 
 class Transcript (models.Model):
     podcast = models.OneToOneField(Podcast, on_delete=models.CASCADE,primary_key=True)

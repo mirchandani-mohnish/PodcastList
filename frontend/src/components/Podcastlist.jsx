@@ -5,7 +5,7 @@ import React from 'react'
 import {Component} from 'react';
 import Pagination from './Pagination';
 import SearchBox from './SearchBox';
-
+import './Podcastlist.css';
 
 
 class Podcastlist extends Component {
@@ -81,20 +81,43 @@ class Podcastlist extends Component {
         
         return Podcasts.map((podcast) => (
             
-            <Col key={podcast._id}>
-                <Card style={{ width: '18rem' }}>
+            // <Col key={podcast._id}>
+            //     <Card style={{ width: '18rem' }}>
                     
-                    <Card.Body>
-                        <Card.Title>{podcast.title}</Card.Title>
-                        <Card.Text>
-                            {podcast.description}
+            //         <Card.Body>
+            //             <Card.Title>{podcast.title}</Card.Title>
+            //             <Card.Text>
+            //                 {podcast.description}
                             
                         
-                        </Card.Text>
-                        <Button variant="primary" onClick={() => {this.props.setCurrentAudio(podcast.audio_file); }}>Play</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
+            //             </Card.Text>
+            //             <Button variant="primary" onClick={() => {this.props.setCurrentAudio(podcast.audio_file); }}>Play</Button>
+            //         </Card.Body>
+            //     </Card>
+            // </Col>
+
+            
+            <div className="col-md-4">
+                <div className="card text-white card-has-bg click-col m-4 shadow" style={{backgroundImage: 'url(' + podcast.photo + ')'}}>
+                    <img className="card-img d-none" src={podcast.photo} alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?" />
+                    <div className="card-img-overlay d-flex flex-column">
+                        <div className="card-body">
+                            <h4 className="card-title mt-0 "><a className="text-white" onClick={(e) => {e.preventDefault(); this.props.setCurrentAudio(podcast.audio_file); }}>{podcast.title}</a></h4>
+                            <small><i className="far fa-clock" /> </small>
+                        </div>
+                        <div className="card-footer">
+                            <div className="media">
+                                <img className="mr-3 rounded-circle" src={podcast.authorImage} alt="Generic placeholder image" style={{maxWidth: '50px'}} />
+                                <div className="media-body">
+                                    <h6 className="my-0 text-white d-block">{podcast.author}</h6>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
             
         ))
     }

@@ -6,17 +6,24 @@ import 'react-h5-audio-player/lib/styles.css';
 export default class MusicPlayerBar extends Component {
     constructor(props){
         super(props);
+        this.props = props;
+        
         this.state = {
+            src: (this.props.AudioFile) ? (this.props.AudioFile) : ("http://www.sousound.com/music/healing/healing_01.mp3"),
             
         }
 
     }
 
-
+    
 
     
 
     render() {
+        console.log("MusicPlayer rerendered")
+        
+        console.log(this.props);
+        console.log(this.state.src);
         return (
             <div>
                 <Container fluid>
@@ -28,7 +35,7 @@ export default class MusicPlayerBar extends Component {
                     
                     
                     <div className="ButtonPanel">
-                    <AudioPlayer src={this.props.AudioFile} onPlay={() => { console.log("playing")}} />
+                    <AudioPlayer src={this.props.audioFile} onPlay={() => { console.log("playing")}} />
     
                     </div>
                     

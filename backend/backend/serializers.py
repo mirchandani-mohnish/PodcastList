@@ -5,4 +5,4 @@ from .models import Podcast
 class PodcastSerializer(serializers.ModelSerializer):
     class Meta:
         model = Podcast
-        fields = ('title', 'description')
+        fields = ('title', 'description','audio_file')

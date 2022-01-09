@@ -32,6 +32,7 @@ class Podcastlist extends Component {
         }
         
         this.renderPodCasts = this.renderPodCasts.bind(this);
+        
     }
 
     async componentDidMount(){
@@ -59,11 +60,12 @@ class Podcastlist extends Component {
         // the searchterm setter function
     }
     
+    
 
     
     renderPodCasts = () => {
         // main function to render the podcasts based on selective terms. 
-        console.log(this.state.searchTerm);
+        
         const PodcastList = this.state.PodcastArray.filter((podcast) => {
             return Object.values(podcast).join("").toLowerCase().includes(this.state.searchTerm.toLowerCase());
             // this line basically combines the entire string of each podcast and then checks whether the search term exists in it.
@@ -89,7 +91,7 @@ class Podcastlist extends Component {
                             
                         
                         </Card.Text>
-                        <Button variant="primary" onClick={this.props.PlayAudio(podcast.audio_file)}>Play</Button>
+                        <Button variant="primary" onClick={() => {this.props.setCurrentAudio(podcast.audio_file); }}>Play</Button>
                     </Card.Body>
                 </Card>
             </Col>

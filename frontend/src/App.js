@@ -27,10 +27,10 @@ function App() {
           <Col>
             <Podcastlist setCurrentAudio={setCurrentAudio}/>
           </Col>
-          <Col lg={3}>
-            <MusicPlayerBar audioFile={currentAudio}/>
-          </Col>
         </Row>
+      </Container>
+      <Container fluid className="MusicPlayerContainer">
+        <MusicPlayerBar audioFile={currentAudio}/>
       </Container>
       
       {/* <MusicPlayerBar /> */}

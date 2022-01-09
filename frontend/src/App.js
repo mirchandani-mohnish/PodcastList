@@ -22,16 +22,18 @@ function App() {
   return (
     
     <div className="App">
-      <Container fluid>
+      <Container fluid className="Podcastlistcontainer">
         <Row>
           <Col>
             <Podcastlist setCurrentAudio={setCurrentAudio}/>
           </Col>
         </Row>
       </Container>
-      <Container fluid className="MusicPlayerContainer">
-        <MusicPlayerBar audioFile={currentAudio}/>
-      </Container>
+
+      <MusicPlayerBar  audioFile={currentAudio}/>
+      {/* <Container fluid className="MusicPlayerContainer">
+        
+      </Container> */}
       
       {/* <MusicPlayerBar /> */}
     </div>

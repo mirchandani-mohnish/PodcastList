@@ -28,14 +28,23 @@ fill: rgb(235, 235, 235) !important;
 fill: #ffffff !important;
 } */
 
+
+
 .rhap_container.audioplayer {
 
-
+position: fixed;
+bottom: 10px;
+left: 50%;
+right: 50%;
+transform: translate(-50%, 0%);
 background-color: white;
 justify-items: center;
 min-height: 100px;
-
+width: 80%;
+align-self: center;
+border-radius: 20px;
 }
+
 .rhap_stacked .rhap_controls-section {
 margin-top: 0 !important;
 }

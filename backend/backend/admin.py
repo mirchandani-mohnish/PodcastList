@@ -5,8 +5,4 @@ from .models import *
 class podcastAdmin(admin.ModelAdmin) :
     list = ('title', 'description')
 
-class transcriptAdmin(admin.ModelAdmin) :
-    list = ('podcast', 'transcript')
-
 admin.site.register(Podcast, podcastAdmin)
-admin.site.register(Transcript, transcriptAdmin)

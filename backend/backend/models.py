@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields.related import ForeignKey
 import requests, os
 import mutagen
 from mutagen.wave import WAVE
@@ -54,7 +55,14 @@ def get_transcript(link):
     result = response.json()
     return result
 
-def convertor(filename):
+def create_transcript_from_JSON(result):
+    stringResult = ""
+    for i in result["words"]:
+        stringResult += i["text"] + " "
+
+    return stringResult
+
+def convertor(filename, instance):
     transcript_id = post_transcript(filename)
     link = "https://api.assemblyai.com/v2/transcript/{}".format(transcript_id)
     print(link)
@@ -64,7 +72,11 @@ def convertor(filename):
         if (result["status"] == "processing" or result["status"] == "queued"):
             continue
         else:
-            print(result)
+            transcript = create_transcript_from_JSON(result)
+            print(transcript)
+            print(instance.title)
+            instance.transcript = transcript
+            instance.save()
             break
 
 def upload_path(instance, filename):
@@ -78,6 +90,7 @@ class Podcast (models.Model):
     authorImage = models.ImageField(upload_to=upload_path, blank = True)
     photo = models.ImageField(upload_to=upload_path, blank = True)
     audio_file = models.FileField(upload_to=upload_path,blank=True, null=True)
+    transcript = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
@@ -93,19 +106,8 @@ class Podcast (models.Model):
 def create_transcript(sender,instance, **kwargs):
     print(instance.audio_file)
     filename = instance.audio_file
-    print(filename)
     filename = "media/{}".format(filename)
-    t1 = threading.Thread(target=convertor, args=(filename,))
-    t1.start()
+    if (len(instance.transcript) == 0 or instance.transcript == None) :
+        t1 = threading.Thread(target=convertor, args=(filename,instance))
+        t1.start()
 
-class Transcript (models.Model):
-    podcast = models.OneToOneField(Podcast, on_delete=models.CASCADE,primary_key=True)
-    transcript = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.podcast.title
-
-    @property
-    def upload_audio(self):
-        print(self.podcast.audio_file)
-        return "Hello"

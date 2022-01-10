@@ -29,15 +29,24 @@ export default class SearchBox extends Component {
     }
     render() {
         return (
-            <div>
-                <div class="form-outline">
-                    <input ref={this.inputElement} type="search" id="form1" class="form-control" value={this.state.searchVal} onChange={this.handleSearch}/>
-                    <label class="form-label" for="form1">Search</label>
+            <div className="container m-4">
+                <div className="row">
+                    <div className="col col-10">
+                        <div className="form-outline">
+                        <input ref={this.inputElement} type="search" id="form1" className="form-control" defaultValue={this.state.searchVal} onchange={this.handleSearch} />
+                        
+                        </div>
+                    </div>
+                    
+                
+                
+                    <div className="col">
+                        <button type="button" className="btn btn-primary">
+                        Search
+                        <i className="fas fa-search" />
+                        </button>
+                    </div>
                 </div>
-                <button type="button" class="btn btn-primary">
-                    Search
-                    <i class="fas fa-search"></i>
-                </button>
             </div>
         )
     }

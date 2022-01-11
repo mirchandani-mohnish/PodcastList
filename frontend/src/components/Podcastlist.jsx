@@ -6,7 +6,7 @@ import {Component} from 'react';
 import Pagination from './Pagination';
 import SearchBox from './SearchBox';
 import './Podcastlist.css';
-
+import TranscriptPopUp from './TranscriptPopUp';
 
 class Podcastlist extends Component {
     constructor(props){
@@ -28,7 +28,9 @@ class Podcastlist extends Component {
             ],
             CurrentPage: 1, 
             PodcastsPerPage: 8,
-            searchTerm: ""
+            searchTerm: "",
+            transcriptWindow: false,
+            transcript: ""
         }
         
         this.renderPodCasts = this.renderPodCasts.bind(this);
@@ -61,7 +63,23 @@ class Podcastlist extends Component {
     }
     
     
+    openTranscript = (transcript) => {
+        this.setState({
+            transcriptWindow : true,
+            transcript : transcript
+        });
 
+
+    }
+
+    closeTranscript = () => {
+        this.setState({
+            transcriptWindow : false,
+            transcript : ""
+        });
+
+
+    }
     
     renderPodCasts = () => {
         // main function to render the podcasts based on selective terms. 
@@ -80,23 +98,7 @@ class Podcastlist extends Component {
 
         
         return Podcasts.map((podcast) => (
-            
-            // <Col key={podcast._id}>
-            //     <Card style={{ width: '18rem' }}>
-                    
-            //         <Card.Body>
-            //             <Card.Title>{podcast.title}</Card.Title>
-            //             <Card.Text>
-            //                 {podcast.description}
-                            
-                        
-            //             </Card.Text>
-            //             <Button variant="primary" onClick={() => {this.props.setCurrentAudio(podcast.audio_file); }}>Play</Button>
-            //         </Card.Body>
-            //     </Card>
-            // </Col>
 
-            
             <div className="col-md-4">
                 <div className="card text-white card-has-bg click-col m-4 shadow" style={{backgroundImage: 'url(' + podcast.photo + ')'}}>
                     <img className="card-img d-none" src={podcast.photo} alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?" />
@@ -105,6 +107,7 @@ class Podcastlist extends Component {
                             <h4 className="card-title mt-0 "><a className="text-white" onClick={(e) => {e.preventDefault(); this.props.setCurrentAudio(podcast.audio_file); }}>{podcast.title}</a></h4>
                             <small><i className="far fa-clock" /> </small>
                         </div>
+                        <div className="transcript h6"><a className="text-white" onClick={(e) => {e.preventDefault(); this.openTranscript(podcast.transcript); }}>Transcript</a></div>
                         <div className="card-footer">
                             <div className="media">
                                 <img className="mr-3 rounded-circle" src={podcast.authorImage} alt="Generic placeholder image" style={{maxWidth: '50px'}} />
@@ -113,6 +116,7 @@ class Podcastlist extends Component {
                                     
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -128,11 +132,10 @@ class Podcastlist extends Component {
             <div className="PodcastListMain">
                 <Container>
                     <SearchBox searchHandler={this.getSearchTerm} />
-                    <Row>
-                        {this.renderPodCasts()}
-                        
-                        
-                    </Row>
+                    {this.state.transcriptWindow === false ? 
+                    <Row>{this.renderPodCasts()}</Row> : <TranscriptPopUp transcript={this.state.transcript} closeButton={this.closeTranscript} />
+                    }
+
                     <Pagination 
                     TotalPodcasts={this.state.PodcastArray.length} 
                     PodcastsPerPage={this.state.PodcastsPerPage}

@@ -33,7 +33,7 @@ export default class SearchBox extends Component {
                 <div className="row">
                     <div className="col col-10">
                         <div className="form-outline">
-                        <input ref={this.inputElement} type="search" id="form1" className="form-control" defaultValue={this.state.searchVal} onchange={this.handleSearch} />
+                        <input ref={this.inputElement} type="search" id="form1" className="form-control" defaultValue={this.state.searchVal} onChange={this.handleSearch} />
                         
                         </div>
                     </div>

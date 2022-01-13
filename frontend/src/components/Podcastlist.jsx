@@ -131,15 +131,27 @@ class Podcastlist extends Component {
         return(
             <div className="PodcastListMain">
                 <Container>
-                    <SearchBox searchHandler={this.getSearchTerm} />
+                    
                     {this.state.transcriptWindow === false ? 
-                    <Row>{this.renderPodCasts()}</Row> : <TranscriptPopUp transcript={this.state.transcript} closeButton={this.closeTranscript} />
+                        (
+                            <>
+                            <SearchBox searchHandler={this.getSearchTerm} />
+                            <Row>{this.renderPodCasts()}</Row>
+                            <Pagination 
+                            TotalPodcasts={this.state.PodcastArray.length} 
+                            PodcastsPerPage={this.state.PodcastsPerPage}
+                            pageChange={this.pageChange} />
+                            </>
+                        ) : 
+                        (
+                            <TranscriptPopUp 
+                            transcript={this.state.transcript} 
+                            closeButton={this.closeTranscript} />
+                        )    
+                            
                     }
 
-                    <Pagination 
-                    TotalPodcasts={this.state.PodcastArray.length} 
-                    PodcastsPerPage={this.state.PodcastsPerPage}
-                    pageChange={this.pageChange} />
+                    
                 </Container>
             </div>  
         );

@@ -1,3 +1,4 @@
+from xml.etree.ElementInclude import default_loader
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 import requests, os
@@ -94,6 +95,7 @@ class Podcast (models.Model):
     audio_file = models.FileField(upload_to=upload_path,blank=True, null=True)
     # transcript = models.TextField(blank=True)
     transcript = RichTextField(blank=True, null=True)
+    transcript_review = models.BooleanField(('Transcript Reviewed?'), default=False, help_text=('Check if the transcript has been reviewed and corrected.'))
     def __str__(self):
         return self.title
 

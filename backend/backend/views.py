@@ -7,5 +7,5 @@ from .models import Podcast
 class PodcastView(viewsets.ModelViewSet):
     serializer_class = PodcastSerializer
     queryset = Podcast.objects.all()
-    # print(queryset.values('title'))
+    
     

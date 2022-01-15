@@ -16,7 +16,10 @@ class TranscriptPopUp extends Component {
                     <h1 className="display-4">Title</h1>
                     
                     <hr className="my-4" />
-                    <p>{this.props.transcript}</p>
+                    <p>
+                        {/* {this.props.transcript} */}
+                        <div dangerouslySetInnerHTML={{__html: this.props.transcript}}></div>
+                    </p>
                     <p className="lead">
                     
                     </p>

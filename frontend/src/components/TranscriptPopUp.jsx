@@ -15,7 +15,7 @@ class TranscriptPopUp extends Component {
         return (
             <div>
                  <div className="jumbotron">
-                    <h1 className="display-4">Title</h1>
+                    <h1 className="display-4">{this.props.podcastTitle}</h1>
                     
                     <hr className="my-4" />
                     <p>

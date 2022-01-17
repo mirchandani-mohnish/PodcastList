@@ -30,7 +30,8 @@ class Podcastlist extends Component {
             PodcastsPerPage: 8,
             searchTerm: "",
             transcriptWindow: false,
-            transcript: ""
+            transcript: "",
+            transcriptTitle: ""
         }
         
         this.renderPodCasts = this.renderPodCasts.bind(this);
@@ -63,10 +64,11 @@ class Podcastlist extends Component {
     }
     
     
-    openTranscript = (transcript) => {
+    openTranscript = (transcript,podcastTitle) => {
         this.setState({
             transcriptWindow : true,
-            transcript : transcript
+            transcript : transcript,
+            transcriptTitle : podcastTitle
         });
 
 
@@ -107,7 +109,7 @@ class Podcastlist extends Component {
                             <h4 className="card-title mt-0 "><a className="text-white" onClick={(e) => {e.preventDefault(); this.props.setCurrentAudio(podcast.audio_file); }}>{podcast.title}</a></h4>
                             <small><i className="far fa-clock" /> </small>
                         </div>
-                        <div className="transcript h6"><a className="text-white" onClick={(e) => {e.preventDefault(); this.openTranscript(podcast.transcript); }}>Transcript</a></div>
+                        <div className="transcript h6"><a className="text-white" onClick={(e) => {e.preventDefault(); this.openTranscript(podcast.transcript,podcast.title); }}>Transcript</a></div>
                         <div className="card-footer">
                             <div className="media">
                                 <img className="mr-3 rounded-circle" src={podcast.authorImage} alt="Generic placeholder image" style={{maxWidth: '50px'}} />
@@ -146,7 +148,8 @@ class Podcastlist extends Component {
                         (
                             <TranscriptPopUp 
                             transcript={this.state.transcript} 
-                            closeButton={this.closeTranscript} />
+                            closeButton={this.closeTranscript} 
+                            podcastTitle={this.state.transcriptTitle} />
                         )    
                             
                     }

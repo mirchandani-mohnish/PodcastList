@@ -96,6 +96,8 @@ class Podcast (models.Model):
     # transcript = models.TextField(blank=True)
     transcript = RichTextField(blank=True, null=True)
     transcript_review = models.BooleanField(('Transcript Reviewed?'), default=False, help_text=('Check if the transcript has been reviewed and corrected.'))
+
+    
     def __str__(self):
         return self.title
 

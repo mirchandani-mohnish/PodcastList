@@ -20,12 +20,13 @@ from backend import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-router = routers.DefaultRouter()
-router.register(r'getPodcasts', views.PodcastView, 'getPodcasts')
+# router = routers.DefaultRouter()
+# router.register(r'getPodcasts', views.PodcastView, 'getPodcasts')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    # path('', include(router.urls))
+    path('getPodcasts/', views.PodcastAPI.as_view())
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

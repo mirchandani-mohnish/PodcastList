@@ -9,6 +9,8 @@ class TranscriptPopUp extends Component {
         this.props = props;
         
     }
+
+    
     render() {
         return (
             <div>
@@ -17,8 +19,13 @@ class TranscriptPopUp extends Component {
                     
                     <hr className="my-4" />
                     <p>
-                        {/* {this.props.transcript} */}
-                        <div dangerouslySetInnerHTML={{__html: this.props.transcript}}></div>
+                        {
+                            (this.props.transcript) ? 
+                        
+                            (<div dangerouslySetInnerHTML={{__html: this.props.transcript}}></div>)
+                            :
+                            (<div>Sorry, The transcript is under review and will be out shortly</div>)
+                        }
                     </p>
                     <p className="lead">
                     
